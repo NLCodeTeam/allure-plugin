@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>4.74</version>
+        <version>5.7</version>
         <relativePath />
     </parent>
 
@@ -21,7 +21,8 @@
         <revision>2.31.0.11</revision>
         <changelist>-SNAPSHOT</changelist>
         <gitHubRepo>jenkinsci/allure-plugin</gitHubRepo>
-        <jenkins.version>2.387.3</jenkins.version>
+        <jenkins.baseline>2.479</jenkins.baseline>
+        <jenkins.version>${jenkins.baseline}.1</jenkins.version>
         <allureCommandline.version>2.21.0</allureCommandline.version>
         <truezip.version>7.7.10</truezip.version>
     </properties>
@@ -211,10 +212,13 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>${spotbugs-maven-plugin.version}</version>
+                <version>4.9.1.0</version>
                 <configuration>
                     <excludeFilterFile>.mvn/quality-configs/spotbugs/exclude.xml</excludeFilterFile>
+                    <effort>Max</effort>
+                    <threshold>Low</threshold>
                     <failOnError>false</failOnError>
+                    <maxHeap>1024</maxHeap>
                 </configuration>
                 <executions>
                     <execution>
@@ -280,8 +284,8 @@
         <dependencies>
             <dependency>
                 <groupId>io.jenkins.tools.bom</groupId>
-                <artifactId>bom-2.387.x</artifactId>
-                <version>2496.vddfca_753db_80</version>
+                <artifactId>bom-${jenkins.baseline}.x</artifactId>
+                <version>4136.vca_c3202a_7fd1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -420,6 +424,10 @@
         <repository>
             <id>repo.jenkins-ci.org</id>
             <url>https://repo.jenkins-ci.org/public/</url>
+        </repository>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
         </repository>
     </repositories>
     <pluginRepositories>

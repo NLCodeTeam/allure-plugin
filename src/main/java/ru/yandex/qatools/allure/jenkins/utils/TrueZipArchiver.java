@@ -44,6 +44,10 @@ public final class TrueZipArchiver extends Archiver {
         zip = new ZipOutputStream(out, Charset.defaultCharset());
     }
 
+    /*package*/ TrueZipArchiver(final OutputStream out, final Charset charset) {
+        zip = new ZipOutputStream(out, charset);
+    }
+
     @Override
     public void visit(final File f,
                       final String rawRelativePath) throws IOException {
@@ -93,6 +97,12 @@ public final class TrueZipArchiver extends Archiver {
         @Override
         public Archiver create(final OutputStream out) throws IOException {
             return new TrueZipArchiver(out);
+        }
+
+        @Override
+        public Archiver create(final OutputStream out,
+                               final Charset filenamesEncoding) throws IOException {
+            return new TrueZipArchiver(out, filenamesEncoding);
         }
     }
 }
